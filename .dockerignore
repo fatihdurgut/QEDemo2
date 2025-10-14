@@ -1,0 +1,74 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+.github
+
+# Documentation
+*.md
+docs/
+
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+**/TestResults/
+**/.vs/
+**/.vscode/
+
+# Dependencies (if not needed in container)
+**/node_modules/
+**/packages/
+**/.nuget/
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test and coverage files
+**/*Tests/
+**/*.Tests/
+**/coverage/
+**/.nyc_output/
+
+# Deployment files (not needed in image)
+deploy/
+*.yml
+*.yaml
+docker-compose*
+
+# CI/CD files
+.github/workflows/
+
+# Terraform
+deploy/terraform/
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Temporary files
+tmp/
+temp/
+*.tmp
