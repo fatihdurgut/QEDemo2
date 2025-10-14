@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pubs-microservices
+  labels:
+    name: pubs-microservices
+    environment: development

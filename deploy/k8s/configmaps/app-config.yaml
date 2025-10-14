@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sqlserver-config
+  namespace: pubs-microservices
+data:
+  ACCEPT_EULA: "Y"
+  MSSQL_PID: "Developer"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+  namespace: pubs-microservices
+data:
+  RABBITMQ_DEFAULT_USER: "guest"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: pubs-microservices
+data:
+  ASPNETCORE_ENVIRONMENT: "Development"
+  Logging__LogLevel__Default: "Information"
+  Logging__LogLevel__Microsoft.AspNetCore: "Warning"

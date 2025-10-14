@@ -1,0 +1,124 @@
+# Default values for pubs-microservices
+replicaCount: 2
+
+image:
+  repository: pubs
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: pubs.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Application configuration
+environment: Development
+
+database:
+  host: sqlserver-service
+  port: 1433
+  name: PubsDb
+  username: sa
+  password: "YourStrong@Passw0rd"
+
+redis:
+  host: redis-service
+  port: 6379
+
+rabbitmq:
+  host: rabbitmq-service
+  port: 5672
+  username: guest
+  password: guest
+
+# Monitoring
+prometheus:
+  enabled: true
+  port: 9090
+
+grafana:
+  enabled: true
+  port: 3000
+
+jaeger:
+  enabled: true
+  port: 16686
+
+# Services configuration
+services:
+  authors:
+    enabled: true
+    port: 5001
+  publishers:
+    enabled: true
+    port: 5002
+  titles:
+    enabled: true
+    port: 5003
+  sales:
+    enabled: true
+    port: 5004
+  employees:
+    enabled: true
+    port: 5005
+  stores:
+    enabled: true
+    port: 5006
+  identity:
+    enabled: true
+    port: 5007
+  notifications:
+    enabled: true
+    port: 5008
+  analytics:
+    enabled: true
+    port: 5009
+  apigateway:
+    enabled: true
+    port: 5000
