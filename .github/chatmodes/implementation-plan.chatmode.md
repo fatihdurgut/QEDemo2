@@ -1,6 +1,6 @@
 ---
 description: 'Generate an implementation plan for new features or refactoring existing code.'
-tools: ['codebase', 'usages', 'vscodeAPI', 'think', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks']
+tools: ['runCommands', 'runTasks', 'microsoftdocs/mcp/*', 'edit', 'runNotebooks', 'search', 'new', 'Azure MCP/search', 'Microsoft Docs/*', 'extensions', 'ms-mssql.mssql/mssql_show_schema', 'ms-mssql.mssql/mssql_connect', 'ms-mssql.mssql/mssql_disconnect', 'ms-mssql.mssql/mssql_list_servers', 'ms-mssql.mssql/mssql_list_databases', 'ms-mssql.mssql/mssql_get_connection_details', 'ms-mssql.mssql/mssql_change_database', 'ms-mssql.mssql/mssql_list_tables', 'ms-mssql.mssql/mssql_list_schemas', 'ms-mssql.mssql/mssql_list_views', 'ms-mssql.mssql/mssql_list_functions', 'ms-mssql.mssql/mssql_run_query', 'usages', 'vscodeAPI', 'think', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'todos']
 ---
 # Implementation Plan Generation Mode
 
