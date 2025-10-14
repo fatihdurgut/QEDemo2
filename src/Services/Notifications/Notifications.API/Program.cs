@@ -1,3 +1,9 @@
+using Notifications.API.Hubs;
+using Notifications.Application.Services;
+using Notifications.Domain.Repositories;
+using Notifications.Infrastructure.Repositories;
+using Notifications.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -12,6 +18,10 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Notifications microservice with SignalR for real-time updates"
     });
 });
+
+// Register application services
+builder.Services.AddSingleton<INotificationRepository, InMemoryNotificationRepository>();
+builder.Services.AddScoped<INotificationService, SignalRNotificationService<NotificationHub>>();
 
 // Add SignalR
 builder.Services.AddSignalR();
@@ -44,5 +54,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
+
+// Map SignalR hub
+app.MapHub<NotificationHub>("/hubs/notifications");
 
 app.Run();
