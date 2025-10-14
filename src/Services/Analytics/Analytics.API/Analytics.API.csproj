@@ -13,4 +13,9 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Analytics.Application\Analytics.Application.csproj" />
+    <ProjectReference Include="..\Analytics.Infrastructure\Analytics.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

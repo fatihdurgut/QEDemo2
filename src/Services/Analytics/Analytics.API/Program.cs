@@ -1,3 +1,6 @@
+using Analytics.Application.Services;
+using Analytics.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -12,6 +15,9 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Analytics and reporting microservice for business intelligence"
     });
 });
+
+// Register application services
+builder.Services.AddScoped<IAnalyticsService, MockAnalyticsService>();
 
 // Add health checks
 builder.Services.AddHealthChecks()
