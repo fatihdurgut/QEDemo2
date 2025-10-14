@@ -1,44 +1,39 @@
+using Authors.API.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add services to the container
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDocumentation();
+
+// Add application services
+builder.Services.AddApplicationServices(builder.Configuration);
+
+// Add health checks
+builder.Services.AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString("AuthorsDb") 
+            ?? "Server=localhost;Database=PubsAuthors;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True",
+        name: "database");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Authors API v1");
+        options.RoutePrefix = string.Empty; // Serve Swagger UI at root
+    });
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.UseAuthorization();
+app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
