@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthorsService } from '../../services/authors.service';
 import { Author } from '../../../../core/models/domain.models';
 
@@ -17,7 +18,8 @@ import { Author } from '../../../../core/models/domain.models';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   templateUrl: './authors-list.component.html',
   styleUrl: './authors-list.component.scss'
