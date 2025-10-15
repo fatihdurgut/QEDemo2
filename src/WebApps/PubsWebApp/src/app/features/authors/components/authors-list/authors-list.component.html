@@ -1,0 +1,85 @@
+<mat-card class="authors-container">
+  <mat-card-header>
+    <mat-card-title>Authors Management</mat-card-title>
+    <mat-card-subtitle>Manage authors and their information</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="actions-bar">
+      <button mat-raised-button color="primary">
+        <mat-icon>add</mat-icon>
+        Add New Author
+      </button>
+      <button mat-raised-button (click)="loadAuthors()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!loading && authors.length === 0" class="no-data">
+      <p>No authors found. Click "Add New Author" to create one.</p>
+    </div>
+
+    <div *ngIf="!loading && authors.length > 0" class="table-container">
+      <table mat-table [dataSource]="authors" class="authors-table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let author">{{ author.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let author">{{ author.firstName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let author">{{ author.lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let author">{{ author.phone }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef>City</th>
+          <td mat-cell *matCellDef="let author">{{ author.city || 'N/A' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let author">{{ author.state || 'N/A' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="contract">
+          <th mat-header-cell *matHeaderCellDef>Contract</th>
+          <td mat-cell *matCellDef="let author">
+            <mat-icon [color]="author.contract ? 'primary' : 'warn'">
+              {{ author.contract ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let author">
+            <button mat-icon-button color="primary" (click)="editAuthor(author)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteAuthor(author)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

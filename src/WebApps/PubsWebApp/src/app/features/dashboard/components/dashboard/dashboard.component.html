@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Pubs Management System Dashboard</h1>
+    <div class="user-info" *ngIf="currentUser$ | async as user">
+      <span>Welcome, {{ user.email }}</span>
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <mat-grid-list cols="3" rowHeight="200" gutterSize="20">
+      <mat-grid-tile *ngFor="let card of dashboardCards">
+        <mat-card class="dashboard-card" [style.border-top-color]="card.color">
+          <mat-card-header>
+            <mat-icon [style.color]="card.color" class="card-icon">{{ card.icon }}</mat-icon>
+            <mat-card-title>{{ card.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ card.description }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button [style.background-color]="card.color" [style.color]="'white'" (click)="navigateTo(card.route)">
+              Open
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
